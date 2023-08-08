@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const Comment = require("./models/comment");
 
 router.post('/search', async (req, res) => {
     const { searchTerm } = req.body;
@@ -27,5 +28,13 @@ router.post('/search', async (req, res) => {
     }
 });
 
+router.post('/comment', async (req, res) => {
+    try {
+        const comment = Comment.create(req.body)
+        res.json(comment)
+    } catch (error) {
+        res.json(error)
+    }
+})
 module.exports = router;
 
